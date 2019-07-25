@@ -1,6 +1,9 @@
 # Unit Testing, Code Consistency, and Linting in Python: 
 ### By Will Norris
 
+# Unit Testing: 
+## Why is Unit Testing Critical?
+
 Testing your code is never the first thing software engineers think of, but it should be! So often we have an idea to make our workflow easier so we implement it as fast as possible. As long as it gives us the desired output it should be fine right? Wrong!
 
 Code that we sling together often only covers the specific use cases that we were dealing with that day. This means that when you dust off that module you used to process your data last time, it may not work as you expected today.
@@ -31,6 +34,21 @@ In addition to testing your own code, if you ever find yourself fixing an edge c
 
 One of the most common reasons that python code works one day and doesn't the next is due to the complex dependency system that python employs. It is not at all uncommon for one of your dependencies to be updated and either alter the way you must make use of their functionality or remove it completely; occasionally updates simply break things too, and get fixed in time. If you have a robust unit testing system in place you can normally pinpoint which dependency is causing your issues, which can save massive amounts of time troubleshooting!
 
+# Linting
+
+As programmers, we write and read code every day. It helps if that code is consistent and similar from file to file or programmer to programmer. This means that we must embrace some form of standards when it comes to formatting our code. Some programming languages have built in formatters and standards (Go), but others follow community agreed standards (python). If you have spent some time programming in python, then you probably have heard of PEP8, which is the standard style guide that the python community agreed to follow many years ago. 
+
+The interesting thing about PEP8 though is that it is just a guide. Golang has a built in tool for enforcing its formatting standards, but python simply has a set of guidelines for programmers to follow. This leads to inconsistent formatting of code from person to person, and can impact the readability of files when sharing open science. 
+
+The automatic tool that GoLang has access to, '''gofmt''', is called a Linting service. This service takes your files, and checks them for style/formatting issues. This ultimately leads to everyone's files being formatted in the same manner. 
+
+Python doesn't have an automatic tool like this built in, but in true python fashion it does have access to some great 3rd party libraries for performing this task. 
+
+Our first useful tool is ```flake8```, which finds style errors and reads out where they are comming from for you. However, flake8 does not fix any of these formatting issues. It just tells you where they are. 
+
+This is where a tool called ```black``` comes in. ```black``` isn't a part of the standard python library, and therefore doesn't adhere 100% to PEP8 standards; however, it does do a phenominal job at cleaning your code into a format that is easy to read. ```black``` actually contains a few extra rules on top of PEP8 standards that its team claim make it even better for maintainable code, which is critical to python programmers. 
+
+
 
 # 1. Our Toolbox
 - Testing Tools
@@ -40,5 +58,3 @@ One of the most common reasons that python code works one day and doesn't the ne
     - black 
 - Continuous Integration
     - Travis-CI
-
-
