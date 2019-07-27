@@ -1,4 +1,4 @@
-# Unit Testing, Code Consistency, and Linting in Python: 
+# How Unit Testing, Linting, and Continuous Integration in Python Can Help Improve Open Science
 ### By Will Norris
 
 # Unit Testing: 
@@ -34,21 +34,33 @@ In addition to testing your own code, if you ever find yourself fixing an edge c
 
 One of the most common reasons that python code works one day and doesn't the next is due to the complex dependency system that python employs. It is not at all uncommon for one of your dependencies to be updated and either alter the way you must make use of their functionality or remove it completely; occasionally updates simply break things too, and get fixed in time. If you have a robust unit testing system in place you can normally pinpoint which dependency is causing your issues, which can save massive amounts of time troubleshooting!
 
+## Tools for Unit Testing: 
+
+In python today, pytest is generally the easiest and most pythonic way to test your code. It is easy to learn how to use, but contains a lot of customizability as your project expands and your testing demands change. Pytest is also easy to integrate into Travis-CI, which we will discuss further down. 
+
+**Add info about pytest, either here or an example in appendix or something**
+
 # Linting
 
-As programmers, we write and read code every day. It helps if that code is consistent and similar from file to file or programmer to programmer. This means that we must embrace some form of standards when it comes to formatting our code. Some programming languages have built in formatters and standards (Go), but others follow community agreed standards (python). If you have spent some time programming in python, then you probably have heard of PEP8, which is the standard style guide that the python community agreed to follow many years ago. 
+As programmers, we write and read code every day. It helps if that code is consistent and similar from file to file or programmer to programmer. The more consistent the code, the faster someone can look past the syntax to see what is actually going on. When code is inconsistent, we have to spend time deciphering syntax before we actually get to the core of the functionality. In order to achieve consistent syntax we must embrace some form of standards when it comes to formatting. Some programming languages have built in formatters and standards (Go), but others follow community agreed standards (python). If you have spent some time programming in python, then you probably have heard of PEP8, which is the standard style guide that the python community agreed to follow many years ago. 
 
-The interesting thing about PEP8 though is that it is just a guide. Golang has a built in tool for enforcing its formatting standards, but python simply has a set of guidelines for programmers to follow. This leads to inconsistent formatting of code from person to person, and can impact the readability of files when sharing open science. 
+The interesting thing about PEP8 though is that it is just a guide. Go has a built in tool for enforcing its formatting standards, but python simply has a set of guidelines for programmers to follow. This leads to inconsistent formatting of code from person to person, and can impact the readability of files when sharing open science. 
 
-The automatic tool that GoLang has access to, '''gofmt''', is called a Linting service. This service takes your files, and checks them for style/formatting issues. This ultimately leads to everyone's files being formatted in the same manner. 
+The automatic tool that Go has access to, '''gofmt''', is called a Linting service. This service takes your files, and checks them for style/formatting issues. This ultimately leads to everyone's files being formatted in the same manner. 
 
-Python doesn't have an automatic tool like this built in, but in true python fashion it does have access to some great 3rd party libraries for performing this task. 
+Python doesn't have an automatic tool like this built in, but in true python fashion it does have access to some great 3rd party libraries for performing this task.
 
-Our first useful tool is ```flake8```, which finds style errors and reads out where they are comming from for you. However, flake8 does not fix any of these formatting issues. It just tells you where they are. 
+Our first useful tool is ```flake8```, which finds style errors and reads out where they are comming from for you. However, flake8 does not fix any of these formatting issues. It just tells you where they are. You will probably end up using flake8 manually for some things, but there are better ways to address the bulk of the issues that will come up.
 
-This is where a tool called ```black``` comes in. ```black``` isn't a part of the standard python library, and therefore doesn't adhere 100% to PEP8 standards; however, it does do a phenominal job at cleaning your code into a format that is easy to read. ```black``` actually contains a few extra rules on top of PEP8 standards that its team claim make it even better for maintainable code, which is critical to python programmers. 
+This is where a tool called ```black``` comes in. ```black``` isn't a part of the standard python library and doesn't adhere 100% to PEP8 standards; however, it does do a phenominal job at cleaning your code into a format that is easy to read and maintain. ```black``` actually contains a few extra rules on top of PEP8 standards that its team claim make it even better for producing maintainable code, which is critical to python programmers; maintaining python libraries can be one of the most difficult long term challenges a programmer faces. But the tools we will discuss further will aid in keeping your projects maintained over time, even when they may not be you prime focus. 
 
+# Continuous Integration
 
+Continuous integration is the tool that really enables the creation of maintainable code. With a continuous integration (CI) service, like Travis-CI, every time you push a new version of your code its unit tests gets run in a fresh vm instance with the dependencies of your choosing. 
+
+This means that every time you make a change to your codebase you can automatically run all of your unit tests in a fresh environment to make sure no adverse affects occured. 
+
+You can also choose to run your continuous integration over specific intervals of time to ensure changes to your dependencies haven't broken what you are using them for. If something does break, you can go look at which test is broken and figure out what changes have lead to this occuring. 
 
 # 1. Our Toolbox
 - Testing Tools
@@ -58,3 +70,10 @@ This is where a tool called ```black``` comes in. ```black``` isn't a part of th
     - black 
 - Continuous Integration
     - Travis-CI
+
+
+Notes to add: 
+- Do i want to discuss how to weave it all together. 
+    - Setup your repo so that each commit goes through flake8 and black
+    - Then push to a CI service, which runs your unit tests via pytest 
+- Probably want that in a repo
