@@ -94,10 +94,9 @@ Now that we've discussed why testing and formatting are both critical to the pro
     Codecov, which stands for "code coverage", is a framework that keeps track of the percentage of lines of your code that are executed by your unit tests. This helps give you an understanding of where you are testing and most importantly where your testing is lacking. It is easy to install and pairs well with pytest, so using it is a no brainer! 
 
 ## 2. Linting Tools
-- Linting Services
-    - ```flake8```
-    - ```black```
-    - ```pre-commit```
+- ```flake8```
+- ```black```
+- ```pre-commit```
 
     We have already discussed why ```flake8``` and ```black``` are so great for us pythonistas. So here we will dive right into how to set them up in your project. 
 
@@ -121,7 +120,9 @@ repos:
 
 
 ## 3. Continuous Integration Tools
-- Continuous Integration: Travis-CI
+- ```Travis-CI```
+
+Travis-CI is my favorite CI service to teach to programmers who work with open source software because it is very well built, free for open source projects, and easy to learn how to use while still having a high ceiling of potential customization. You can run the most basic pytest testing suite in Travis or you can build software in multiple OS's and automatically deploy your code to several sources when it's done. 
 
 
 Notes to add: 
