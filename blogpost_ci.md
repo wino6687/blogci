@@ -8,7 +8,7 @@
 
 # Introduction
 
-Packaging up python software that has helped improve you or your team's workflow can be very beneficial to the greater python community. However, without the proper infrastructure in place, your python package will either likely break over time or be too difficult for other users to use it efficiently. 
+Packaging up python software that has helped improve you or your team's workflow can be very beneficial to the greater python community; making your software more robust can also improve your ability to use it in house. However, without the proper infrastructure in place, your python package will either likely break over time or be too difficult for other users to use it efficiently. 
 
 In order to make your software work in the long haul and to a broader group of users it is important to consider what it is meant to do, whether it achieves that goal, and if the code will be maintainable into the future. These three requirements can be addressed via three tools: unit testing, linting, and continuous integration. With these three tools you can ensure that your python packages will function into the future, and are well positioned to have new users use them or build upon them. 
 
@@ -72,21 +72,36 @@ __Note:__ I will be using Travis-CI as my example CI service because it is easy/
 
 Continuous integration is likely the most important tool for enabling the creation of maintainable code. With a continuous integration (CI) service, like Travis-CI, every time you push a new version of your code its unit tests gets run in a fresh vm instance with the dependencies of your choosing. 
 
-
 This means that every time you make a change to your codebase you can automatically run all of your unit tests in a fresh environment to make sure no adverse affects occured. 
 
 You can also choose to run your continuous integration over specific intervals of time to ensure changes to your dependencies haven't broken what you are using them for. If something does break, you can go look at which test is broken and figure out what changes have lead to this occuring. 
 
-CI services aren't just useful for running tests, they also provide the ability to deploy code. For example, every time I publish a new version of my git repo a tagged commit is created, which then triggers a command to publish a new pypi version of my software. There are many different "hooks" you can add that get triggered when certain build conditions are met. 
+CI services aren't just useful for running tests, they also provide the ability to deploy code. For example, every time a tagged commit is created in my git repo, a command is triggered to publish a new pypi version of my software. There are many different "hooks" you can add that get triggered when certain build conditions are met. 
 
-# 1. Our Toolbox
-- Testing Tools
-    - Pytest 
-    - Codecov
+# Our Toolbox
+
+Now that we've discussed why testing and formatting are both critical to the process of creating reliable python code let's dig into the tools we have to implement them. 
+
+## 1. Testing Tools
+- ```Pytest``` 
+
+    Pytest is a very easy to use and pythonic testing library for python projects. It can be easily installed into a pip or conda environment, and requires very little extra code to start working. 
+
+    Is is also very flexible and can handle most testing requirments you could need. 
+
+- ```Codecov```
+
+    Codecov, which stands for "code coverage", is a framework that keeps track of the percentage of lines of your code that are executed by your unit tests. This helps give you an understanding of where you are testing and most importantly where your testing is lacking. It is easy to install and pairs well with pytest, so using it is a no brainer! 
+
+## 2. Linting Tools
 - Linting Services
-    - black 
+    - ```black```
+
+## 3. Continuous Integration Tools
 - Continuous Integration
     - Travis-CI
+    - Jenkins 
+    - AppVeyor
 
 
 Notes to add: 
