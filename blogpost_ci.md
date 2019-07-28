@@ -83,25 +83,45 @@ CI services aren't just useful for running tests, they also provide the ability 
 Now that we've discussed why testing and formatting are both critical to the process of creating reliable python code let's dig into the tools we have to implement them. 
 
 ## 1. Testing Tools
-- ```Pytest``` 
+- ```pytest``` 
 
     Pytest is a very easy to use and pythonic testing library for python projects. It can be easily installed into a pip or conda environment, and requires very little extra code to start working. 
 
     Is is also very flexible and can handle most testing requirments you could need. 
 
-- ```Codecov```
+- ```codecov```
 
     Codecov, which stands for "code coverage", is a framework that keeps track of the percentage of lines of your code that are executed by your unit tests. This helps give you an understanding of where you are testing and most importantly where your testing is lacking. It is easy to install and pairs well with pytest, so using it is a no brainer! 
 
 ## 2. Linting Tools
 - Linting Services
+    - ```flake8```
     - ```black```
+    - ```pre-commit```
+
+    We have already discussed why ```flake8``` and ```black``` are so great for us pythonistas. So here we will dive right into how to set them up in your project. 
+
+    Since we want to run ```flake8``` and ```black``` each time we commit new code, we will take advantage of another framework called ```pre-commit```, which allows us to specify an array of different tasks that we want performed any time we try to commit new code; if the tasks pass, then we can commit, if they fail then we must address them before committing. 
+
+    In order to use ```pre-commit``` we simply need to create a ```.pre-commit-config.yaml``` file. An example that triggers ```black``` and ```flake8``` can be seen below.
+
+```
+repos:
+-   repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+    - id: black
+      language_version: python3.6
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+    - id: flake8
+```
+
+
 
 ## 3. Continuous Integration Tools
-- Continuous Integration
-    - Travis-CI
-    - Jenkins 
-    - AppVeyor
+- Continuous Integration: Travis-CI
 
 
 Notes to add: 
