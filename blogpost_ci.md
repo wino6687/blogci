@@ -1,10 +1,22 @@
 # How Unit Testing, Linting, and Continuous Integration in Python Can Help Improve Open Science
 ### By Will Norris
 
+- alternate titles: 
+    - How Proper Unit Testing and Linting can Help Make Your Open Source Software More Accessible
+        - the idea here is that unit testing and linting can really help make code last longer and be used by more people 
+        - it forces you to think about how users will be able to access your tools 
+
+# Introduction
+
+Packaging up python software that has helped improve you or your team's workflow can be very beneficial to the greater python community. However, without the proper infrastructure in place, your python package will either likely break over time or be too difficult for other users to use it efficiently. 
+
+In order to make your software work in the long haul and to a broader group of users it is important to consider what it is meant to do, whether it achieves that goal, and if the code will be maintainable into the future. These three requirements can be addressed via three tools: unit testing, linting, and continuous integration. With these three tools you can ensure that your python packages will function into the future, and are well positioned to have new users use them or build upon them. 
+
+
 # Unit Testing: 
 ## Why is Unit Testing Critical?
 
-Testing your code is never the first thing software engineers think of, but it should be! So often we have an idea to make our workflow easier so we implement it as fast as possible. As long as it gives us the desired output it should be fine right? Wrong!
+Testing your code is never the first thing software engineers think of, but it should be! So often we have an idea to make our workflow easier so we implement it as fast as possible. As long as it gives us the desired output it should be fine right?
 
 Code that we sling together often only covers the specific use cases that we were dealing with that day. This means that when you dust off that module you used to process your data last time, it may not work as you expected today.
 
@@ -46,21 +58,26 @@ As programmers, we write and read code every day. It helps if that code is consi
 
 The interesting thing about PEP8 though is that it is just a guide. Go has a built in tool for enforcing its formatting standards, but python simply has a set of guidelines for programmers to follow. This leads to inconsistent formatting of code from person to person, and can impact the readability of files when sharing open science. 
 
-The automatic tool that Go has access to, '''gofmt''', is called a Linting service. This service takes your files, and checks them for style/formatting issues. This ultimately leads to everyone's files being formatted in the same manner. 
+The automatic tool that Go has access to, ```gofmt```, is called a linting service. This service takes your files and checks them for style/formatting issues. It then handles any issues found and returns a fixed file. This ultimately leads to everyone's files being formatted in the same manner. 
 
 Python doesn't have an automatic tool like this built in, but in true python fashion it does have access to some great 3rd party libraries for performing this task.
 
 Our first useful tool is ```flake8```, which finds style errors and reads out where they are comming from for you. However, flake8 does not fix any of these formatting issues. It just tells you where they are. You will probably end up using flake8 manually for some things, but there are better ways to address the bulk of the issues that will come up.
 
-This is where a tool called ```black``` comes in. ```black``` isn't a part of the standard python library and doesn't adhere 100% to PEP8 standards; however, it does do a phenominal job at cleaning your code into a format that is easy to read and maintain. ```black``` actually contains a few extra rules on top of PEP8 standards that its team claim make it even better for producing maintainable code, which is critical to python programmers; maintaining python libraries can be one of the most difficult long term challenges a programmer faces. But the tools we will discuss further will aid in keeping your projects maintained over time, even when they may not be you prime focus. 
+This is where a tool called ```black``` comes in. ```black``` isn't a part of the standard python library and doesn't adhere 100% to PEP8 standards; however, it does do a phenominal job at cleaning your code into a format that is easy to read and maintain. ```black``` actually contains a few extra rules on top of PEP8 standards that its team claim make it even better for producing maintainable code, which is critical to python programmers; maintaining python libraries can be one of the most difficult long term challenges a programmer faces. Luckily the tools we will discuss next will further aid in keeping your projects maintained over time.
 
 # Continuous Integration
 
-Continuous integration is the tool that really enables the creation of maintainable code. With a continuous integration (CI) service, like Travis-CI, every time you push a new version of your code its unit tests gets run in a fresh vm instance with the dependencies of your choosing. 
+__Note:__ I will be using Travis-CI as my example CI service because it is easy/free to integrate with public github repositories and is very flexible with its use. 
+
+Continuous integration is likely the most important tool for enabling the creation of maintainable code. With a continuous integration (CI) service, like Travis-CI, every time you push a new version of your code its unit tests gets run in a fresh vm instance with the dependencies of your choosing. 
+
 
 This means that every time you make a change to your codebase you can automatically run all of your unit tests in a fresh environment to make sure no adverse affects occured. 
 
 You can also choose to run your continuous integration over specific intervals of time to ensure changes to your dependencies haven't broken what you are using them for. If something does break, you can go look at which test is broken and figure out what changes have lead to this occuring. 
+
+CI services aren't just useful for running tests, they also provide the ability to deploy code. For example, every time I publish a new version of my git repo a tagged commit is created, which then triggers a command to publish a new pypi version of my software. There are many different "hooks" you can add that get triggered when certain build conditions are met. 
 
 # 1. Our Toolbox
 - Testing Tools
