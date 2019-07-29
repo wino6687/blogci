@@ -170,3 +170,9 @@ Your ```travis.yml``` file is quite specific to the type of project you are test
 
 ***The example I will use below is for a simple python library, however continuous integration can be useful for code that is not packaged as well.***
 
+CODE FOR TRAVIS.YML FILE GOES HERE 
+
+We can see that the travis file runs our pytest functions with a code coverage command attached. This means that everytime you push code to your repo, Travis will automatically build a fresh environment, run your unit tests, and then generate a code coverage report. 
+
+***A tip for Anyone Web Scraping***
+- Establishing a real http connection with your tiny linux instance in Travis is slow and not reliable, so instead of pinging real servers, it is best to build a mock server script and run that within your Travis environment.  
