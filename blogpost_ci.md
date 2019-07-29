@@ -140,7 +140,7 @@ Most of these technologies only require a simple config file to provide the func
 
 To start you must have a public github repository that contains the code you have manually been deploying to pypi for distribution. It isn't mandatory that your code is a python library, however some of this guide will pertain to automatic deployment, which you can just skip if you aren't deploying. 
 
-### 1. Setup your pre-commit yml file 
+### 1. Setup your pre-commit yml file
 
 The first step of the whole process is to begin linting your code using ```flake8``` and ```black```. To do this we will use another framework called ```pre-commit```, which lets you add all kinds of hooks that occur anytime you try to commit new code. We will add two hooks, one for ```flake8``` that checks our code for formatting issues, and ```black``` which handles most of the formatting issues that our code may contain. 
 
@@ -159,4 +159,14 @@ repos:
     - id: flake8
 ```
 
-As you can see above, all we need to do in a ```pre-commit``` config file is specify the repos that we would like to pull our hooks from. 
+As you can see above, all we need to do in a ```pre-commit``` config file is specify the repos that we would like to pull our hooks from. Now when you commit code to your repo you should see the outputs from both ```flake8``` and ```black```.
+
+
+### Setup your Travis-CI service
+
+In order to use Travis-CI, you need to head to [their website](https://docs.travis-ci.com), where you can login with your github account and connect the repository you are working from. Once you have connected your repo, the rest of the work is done by your ```.travis.yml``` file, which goes in the root directory of you repo. 
+
+Your ```travis.yml``` file is quite specific to the type of project you are testing. 
+
+***The example I will use below is for a simple python library, however continuous integration can be useful for code that is not packaged as well.***
+
