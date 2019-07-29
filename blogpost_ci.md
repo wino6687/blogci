@@ -174,5 +174,14 @@ CODE FOR TRAVIS.YML FILE GOES HERE
 
 We can see that the travis file runs our pytest functions with a code coverage command attached. This means that everytime you push code to your repo, Travis will automatically build a fresh environment, run your unit tests, and then generate a code coverage report. 
 
-***A tip for Anyone Web Scraping***
-- Establishing a real http connection with your tiny linux instance in Travis is slow and not reliable, so instead of pinging real servers, it is best to build a mock server script and run that within your Travis environment.  
+## Tips for Various Travis Tasks
+***Web Scraping***
+ 
+Establishing a real http connection with your tiny linux instance in Travis is slow and not reliable, so instead of pinging real servers, it is best to build a mock server script and run that within your Travis environment. There is an example ```.travis.yml``` file [here](TRAVIS YML WITH MOCK SERVER), that shows how to spinup a mock server along with the code for one. 
+
+***Complicated Installs***
+
+While python is wonderful and very flexible, building a reliable environment can be quite difficult! This is especially true if you are using a particular package many of us are familiar with -  ***GDAL***. 
+
+If you have a more complex environment to set up, or are running your tests on multiple environments then you will likely want to setup simple shell scripts for installing and testing.
+
