@@ -130,3 +130,33 @@ Notes to add:
     - Setup your repo so that each commit goes through flake8 and black
     - Then push to a CI service, which runs your unit tests via pytest 
 - Probably want that in a repo
+
+
+# Okay, So What Do You Need to Add to Your Repo? 
+
+We've covered a lot of ground here, and it's totally possible that you are struggling with where to start. Let's break down where each of these frameworks get integrated into your project. 
+
+Most of these technologies only require a simple config file to provide the functionality you need, however there is some interaction that should be made clear before you jump right in. 
+
+To start you must have a public github repository that contains the code you have manually been deploying to pypi for distribution. It isn't mandatory that your code is a python library, however some of this guide will pertain to automatic deployment, which you can just skip if you aren't deploying. 
+
+### 1. Setup your pre-commit yml file 
+
+The first step of the whole process is to begin linting your code using ```flake8``` and ```black```. To do this we will use another framework called ```pre-commit```, which lets you add all kinds of hooks that occur anytime you try to commit new code. We will add two hooks, one for ```flake8``` that checks our code for formatting issues, and ```black``` which handles most of the formatting issues that our code may contain. 
+
+To do this, we need to add our ```.pre-commit-config.yaml``` file to the root directory of our repo and tell it to run our linting services. Here is an example file with these two requirments: 
+
+```
+repos:
+-   repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+    - id: black
+      language_version: python3.6
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+    - id: flake8
+```
+
+As you can see above, all we need to do in a ```pre-commit``` config file is specify the repos that we would like to pull our hooks from. 
