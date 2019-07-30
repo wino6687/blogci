@@ -166,22 +166,54 @@ As you can see above, all we need to do in a ```pre-commit``` config file is spe
 
 In order to use Travis-CI, you need to head to [their website](https://docs.travis-ci.com), where you can login with your github account and connect the repository you are working from. Once you have connected your repo, the rest of the work is done by your ```.travis.yml``` file, which goes in the root directory of you repo. 
 
-Your ```travis.yml``` file is quite specific to the type of project you are testing. 
+Your ```travis.yml``` file is quite specific to the type of project you are testing. The example I will use below is for a simple python library, however continuous integration can be useful for code that is not packaged as well.
 
-***The example I will use below is for a simple python library, however continuous integration can be useful for code that is not packaged as well.***
-
-CODE FOR TRAVIS.YML FILE GOES HERE 
+```
+language: python
+python:
+  - "2.7"
+  - "3.6"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - pytest
+```
 
 We can see that the travis file runs our pytest functions with a code coverage command attached. This means that everytime you push code to your repo, Travis will automatically build a fresh environment, run your unit tests, and then generate a code coverage report. 
+
+In this example we build the environment from a pip install of a text file. This works well for many simpler projects, but as things get more complicated you may want to use conda environments or virtual environments with bash scripts to aid in more complex installation. I will discuss this more below, but you can see an example [here](LINK SWEPY INTALLATION SCRIPT) of a repo that builds a different conda environment depending on what operating system is being run. 
 
 ## Tips for Various Travis Tasks
 ***Web Scraping***
  
 Establishing a real http connection with your tiny linux instance in Travis is slow and not reliable, so instead of pinging real servers, it is best to build a mock server script and run that within your Travis environment. There is an example ```.travis.yml``` file [here](TRAVIS YML WITH MOCK SERVER), that shows how to spinup a mock server along with the code for one. 
 
+***Testing on Multiple OS's***
+
+There are a couple different ways to test on more than one OS in Travis. The documentation for doing so is [here](Travis Multiple OS Docs), however these docks are not a complete picture for python projects. 
+
+The key to testing in multiple OS's is using Travis's ```matrix``` keyword in your yml file. You can do something like this:
+
+```
+matrix:
+  include:
+  - os: linux
+    python: '3.6'
+    dist: xenial
+  - os: linux
+    python: '3.7'
+    dist: xenial
+  - os: osx
+    language: generic
+```
+
 ***Complicated Installs***
 
 While python is wonderful and very flexible, building a reliable environment can be quite difficult! This is especially true if you are using a particular package many of us are familiar with -  ***GDAL***. 
 
-If you have a more complex environment to set up, or are running your tests on multiple environments then you will likely want to setup simple shell scripts for installing and testing.
+If you have a more complex environment to set up, or are running your tests on multiple environments then you will likely want to setup simple shell scripts for installing and testing. Examples for a setup like this can be found [here](FOLDER IN REPO ABOUT INSTALL.SH AND TEST.SH)
+
+
 
