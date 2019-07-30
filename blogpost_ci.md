@@ -102,22 +102,7 @@ Now that we've discussed why testing and formatting are both critical to the pro
 
     Since we want to run ```flake8``` and ```black``` each time we commit new code, we will take advantage of another framework called ```pre-commit```, which allows us to specify an array of different tasks that we want performed any time we try to commit new code; if the tasks pass, then we can commit, if they fail then we must address them before committing. 
 
-    In order to use ```pre-commit``` we simply need to create a ```.pre-commit-config.yaml``` file. An example that triggers ```black``` and ```flake8``` can be seen below.
-
-```
-repos:
--   repo: https://github.com/ambv/black
-    rev: stable
-    hooks:
-    - id: black
-      language_version: python3.6
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v1.2.3
-    hooks:
-    - id: flake8
-```
-
-
+    In order to use ```pre-commit``` we simply need to create a ```.pre-commit-config.yaml``` file. An example that triggers ```black``` and ```flake8``` can be seen below in the step by step guide. 
 
 ## 3. Continuous Integration Tools
 - ```Travis-CI```
