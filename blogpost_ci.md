@@ -161,8 +161,21 @@ repos:
 
 As you can see above, all we need to do in a ```pre-commit``` config file is specify the repos that we would like to pull our hooks from. Now when you commit code to your repo you should see the outputs from both ```flake8``` and ```black```.
 
+### 2. Add your flake8 config file ```.flake8```
 
-### Setup your Travis-CI service
+This file is a simple config file for ```flake8``` that tells it to ignore some issues. It goes in the root directory of your project. There are some preset errors to ignore that black technically breaks, which are reflected in the example file below: 
+
+```
+[flake8]
+ignore = E203, E266, E501, W503, F403
+max-line-length = 79
+max-complexity = 18
+select = B,C,E,F,W,T4,B9
+```
+
+If you decide you want to be able to break other errors that ```flake8``` flags, you can lookup the code for the error and add it to your ```ignore``` list. 
+
+### 3. Setup your Travis-CI service
 
 In order to use Travis-CI, you need to head to [their website](https://docs.travis-ci.com), where you can login with your github account and connect the repository you are working from. Once you have connected your repo, the rest of the work is done by your ```.travis.yml``` file, which goes in the root directory of you repo. 
 
@@ -209,11 +222,21 @@ matrix:
     language: generic
 ```
 
+Here we can see that Travis will spin up three seperate instances, each running their respective OS and distributions. When you do something like this it is likelhy to complicate you installation process, as different operating systems have different installation processes depending on your dependencies. See the next section for advice on installing with shell scripts.
+
 ***Complicated Installs***
 
 While python is wonderful and very flexible, building a reliable environment can be quite difficult! This is especially true if you are using a particular package many of us are familiar with -  ***GDAL***. 
 
-If you have a more complex environment to set up, or are running your tests on multiple environments then you will likely want to setup simple shell scripts for installing and testing. Examples for a setup like this can be found [here](FOLDER IN REPO ABOUT INSTALL.SH AND TEST.SH)
+If you have a more complex environment to set up, or are running your tests on multiple environments then you will likely want to setup simple shell scripts for installing and testing. Shell scripts give you far more flexibility when it comes to creating your Travis environment. They aren't quite as easy to setup as simply using Travis' built in install and test commands, however they give you a lot of control. Examples for a setup like this can be found [here](FOLDER IN REPO ABOUT INSTALL.SH AND TEST.SH).
+
+***Note:*** It is always possible to change the way you are building your Travis environments later, so there is no harm starting with one option and converting later. 
 
 
+
+Notes to add: 
+- want to provide an example suite for users to see different travis configs. 
+    - there are so many ways to do it, and they are everyewhere
+    - even if some are just links to other repos (like tornado) that do things that may be useful to other user groups 
+    - 
 
