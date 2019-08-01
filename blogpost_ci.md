@@ -8,7 +8,7 @@
 
 # Introduction
 
-Packaging up python software that has helped improve you or your team's workflow can be very beneficial to the greater python community; making your software more robust can also improve your ability to use it in house. However, without the proper infrastructure in place, your python package will either likely break over time or be too difficult for other users to use it efficiently. 
+Packaging up python software that has helped improve you or your team's workflow can be very beneficial to the greater python community; making your software more robust can also improve your ability to use it in house. However, without the proper infrastructure in place, your python package will either likely break over time or be too difficult for other users to use it efficiently. Making your data pipeline public can also give you exposure to other great programmers working on similar problems; the more people using your code, the more likely it is to grow and improve.
 
 In order to make your software work in the long haul and to a broader group of users it is important to consider what it is meant to do, whether it achieves that goal, and if the code will be maintainable into the future. These three requirements can be addressed via three tools: unit testing, linting, and continuous integration. With these three tools you can ensure that your python packages will function into the future, and are well positioned to have new users use them or build upon them. 
 
@@ -87,18 +87,18 @@ Now that we've discussed why testing and formatting are both critical to the pro
 
     Pytest is a very easy to use and pythonic testing library for python projects. It can be easily installed into a pip or conda environment, and requires very little extra code to start working. 
 
-    Is is also very flexible and can handle most testing requirments you could need. 
+    Pytest is also very flexible and can handle most testing requirments you could need, which makes it a great tool for new and experienced python users alike; it also is well suited to grow with projects that start small and scale quickly. 
 
 - ```codecov```
 
-    Codecov, which stands for "code coverage", is a framework that keeps track of the percentage of lines of your code that are executed by your unit tests. This helps give you an understanding of where you are testing and most importantly where your testing is lacking. It is easy to install and pairs well with pytest, so using it is a no brainer! 
+    Codecov, which stands for "code coverage", is a framework that keeps track of the percentage of lines of your code that are executed by your unit tests. This helps give you an understanding of where you are testing and most importantly where your testing is lacking. It is easy to install and pairs well with pytest, so using it is a no brainer!
+
 
 ## 2. Linting Tools
 - ```flake8```
 - ```black```
 - ```pre-commit```
 
-    We have already discussed why ```flake8``` and ```black``` are so great for us pythonistas. So here we will dive right into how to set them up in your project. 
 
     Since we want to run ```flake8``` and ```black``` each time we commit new code, we will take advantage of another framework called ```pre-commit```, which allows us to specify an array of different tasks that we want performed any time we try to commit new code; if the tasks pass, then we can commit, if they fail then we must address them before committing. 
 
@@ -110,11 +110,23 @@ Now that we've discussed why testing and formatting are both critical to the pro
 Travis-CI is my favorite CI service to teach to programmers who work with open source software because it is very well built, free for open source projects, and easy to learn how to use while still having a high ceiling of potential customization. You can run the most basic pytest testing suite in Travis or you can build software in multiple OS's and automatically deploy your code to several sources when it's done. 
 
 
-Notes to add: 
-- Do i want to discuss how to weave it all together. 
-    - Setup your repo so that each commit goes through flake8 and black
-    - Then push to a CI service, which runs your unit tests via pytest 
-- Probably want that in a repo
+## Tool Wrap Up: 
+
+To show you the flow, refer to the steps below: 
+
+1. Code is written and committed 
+
+2. ```pre-commit``` is triggered
+    -  ```black``` formats code
+    -   ```flake8``` checks for formatting errrors
+
+3. Repeat step 2 until all errors are resolved 
+
+4. ```travis-CI``` is triggered by git push
+    -  ```pytest``` suite is run in vm 
+    -  ```codecov``` report is generated 
+
+5. Upon success, code is deployed by Travis to PyPi
 
 
 # Okay, So What Do You Need to Add to Your Repo? 
@@ -225,3 +237,8 @@ Notes to add:
     - even if some are just links to other repos (like tornado) that do things that may be useful to other user groups 
     - 
 
+# Wrap Up and Documentation: 
+
+You now have all of the tools to begin improving your python project's infratstructure. While we have provided several examples for you, there is no replacement for reading the documentation for each framework we are using. Below I have linked most of the relevant documentation that should help guide you through any troubleshooting you may still need afer reading this article. 
+
+While it takes a decent amount of work up front, setting up a robust system for writing maintainable and deployable code will benifit you in the long run. 
