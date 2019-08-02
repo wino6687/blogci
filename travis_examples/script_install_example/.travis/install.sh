@@ -13,8 +13,8 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     conda config --add channels conda-forge
     conda info -a
     conda init bash
-    conda env create -f test.yml
-    conda activate swepy_env
+    conda env create -f environment.yml
+    conda activate env
     python setup.py install
 
 else
@@ -29,7 +29,7 @@ else
     conda update conda
     conda info -a
     conda config --add channels conda-forge
-    conda env create -f test.yml
-    conda activate swepy_env
+    conda env create -f environment.yml
+    conda activate env
     python setup.py install
 fi
