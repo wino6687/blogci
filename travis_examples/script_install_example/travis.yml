@@ -15,7 +15,7 @@ install:
   - pip install codecov
 before_script: 
   # before we run tests, run server in background 
-  - python3 swepy/tests/mock_server.py &
+  - python3 mock_server.py &
 script:
   - chmod +x .travis/test.sh
   - "./.travis/test.sh --cov=swepy"
