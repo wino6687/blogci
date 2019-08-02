@@ -1,0 +1,13 @@
+language: python
+python:
+  - "2.7"
+  - "3.6"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+before_script: 
+  # before we run tests, run server in background 
+  - python3 mock_server.py &
+script:
+  - pytest
