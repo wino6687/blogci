@@ -1,5 +1,5 @@
 import pytest
-import my_module
+from my_module import my_module
 
 # every test starts with "test"
 def test_square():
