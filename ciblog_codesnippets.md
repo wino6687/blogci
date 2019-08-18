@@ -61,3 +61,21 @@ matrix:
   - os: osx
     language: generic
 ```
+
+6. File Structure
+```
+.
+├── README.md
+├── my_module
+│   ├── __init__.py
+│   ├── my_module.py
+│   └── tests
+│       └── test_module.py
+├── requirements.txt
+├── setup.py
+└── travis_examples
+    ├── mock_server_example
+    │   └── mock_server.py
+    └── script_install_example
+        └── travis.yml
+```
